@@ -51,6 +51,38 @@ Sortie attendue:
 */
 
 function getStudentsPerCurriculum(campuses, curriculumName) {
+
+  let arr = campuses.filter (camp => camp.curriculums.name == curriculumName ? camp.curriculums[0] : camp.curriculums[1]);
+
+  return arr.map(camp => camp.city === 'Bordeaux' ? {Bordeaux: camp.curriculums[0].numStudents}:{Lille: camp.curriculums[0].numStudents});
 }
+
+console.log(getStudentsPerCurriculum([
+  { city: 'Bordeaux',
+    curriculums: [
+      { name: 'PHP/Symfony', numStudents: 12 },
+      { name: 'JS/React', numStudents: 29 }
+    ]
+  },
+  {
+    city: 'La Loupe',
+    curriculums: [
+      { name: 'JS/Angular', numStudents: 32 }
+    ]
+  },
+  {
+    city: 'Lille',
+    curriculums: [
+      { name: 'PHP/Symfony', numStudents: 12 },
+      { name: 'JS/React', numStudents: 10 }
+    ]
+  },
+  {
+    city: 'Marseille',
+    curriculums: [
+      { name: 'JS/React', numStudents: 16 }
+    ]
+  }
+], 'PHP/Symfony'));
 
 module.exports = getStudentsPerCurriculum;
